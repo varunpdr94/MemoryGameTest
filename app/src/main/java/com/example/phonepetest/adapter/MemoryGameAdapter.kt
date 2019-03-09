@@ -52,16 +52,17 @@ class MemoryGameAdapter(private val mContext: Context, val modelList: List<Memor
             }
             binding.executePendingBindings()
         }
-        if(!binding.bannerView.hasOnClickListeners()) {
+        if (!binding.bannerView.hasOnClickListeners()) {
             binding.bannerView.setOnClickListener {
                 if (lastOpenedPosition != -1) {
-                    if (model.id == modelList.get(lastOpenedPosition).id && position!=lastOpenedPosition) {
+                    if (model.id == modelList.get(lastOpenedPosition).id && position != lastOpenedPosition) {
                         openCardCount += 2
                         if (openCardCount == modelList.size) {
                             listener.onGameFinish()
                         } else {
                             lastOpenedPosition = -1
-                            Log.d("last position",lastOpenedPosition.toString())
+                            Log.d("last position", lastOpenedPosition.toString())
+                            binding.bannerView.visibility = View.GONE
                             listener.onImageMatch()
                         }
 
@@ -74,7 +75,7 @@ class MemoryGameAdapter(private val mContext: Context, val modelList: List<Memor
                         firstClick = true
                     }
                     lastOpenedPosition = position
-                    Log.d("last position",lastOpenedPosition.toString())
+                    Log.d("last position", lastOpenedPosition.toString())
                     binding.bannerView.visibility = View.GONE
                 }
             }
@@ -85,10 +86,9 @@ class MemoryGameAdapter(private val mContext: Context, val modelList: List<Memor
         modelList.get(position).isVisible = false
         modelList.get(lastPost).isVisible = false
         lastOpenedPosition = -1;
-        Log.d("pos",position ","+ lastPost.toString())
-        Log.d("last position",lastOpenedPosition.toString())
-        notifyItemChanged(lastPost)
-        notifyItemChanged(position)
+        Log.d("pos", position.toString() + "," + lastPost.toString())
+        Log.d("last position", lastOpenedPosition.toString())
+        notifyDataSetChanged()
     }
 
 
