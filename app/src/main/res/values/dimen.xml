@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+</resources>
